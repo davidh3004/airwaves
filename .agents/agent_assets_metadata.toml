@@ -1,0 +1,20 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "etSau4mQL0mZeIKjIwcHV"
+uri = "file://artifacts/air-waves-comfort/public/gallery/van-mansion.png"
+type = "image"
+title = "hvac van luxury miami mansion"
+
+[[generated]]
+id = "L_UGBqUHzvIxsx8COZlcY"
+uri = "file://artifacts/air-waves-comfort/public/gallery/van-fleet.png"
+type = "image"
+title = "hvac van fleet miami headquarters"
+
+[[generated]]
+id = "vxhECUPGSVfogEtBqA5IT"
+uri = "file://artifacts/air-waves-comfort/public/gallery/van-residential.png"
+type = "image"
+title = "hvac van technician miami home"
