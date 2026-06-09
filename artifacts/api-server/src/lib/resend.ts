@@ -11,6 +11,22 @@ export interface QuoteEmailData {
   lang: "en" | "es";
 }
 
+/** Send a request through the Resend connector and throw if it fails. */
+async function resendSend(payload: object): Promise<void> {
+  const response = await connectors.proxy("resend", "/emails", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+
+  // connectors.proxy resolves even on 4xx/5xx — check explicitly
+  const status: number = (response as any)?.status ?? (response as any)?.statusCode ?? 0;
+  if (status && status >= 400) {
+    const body = JSON.stringify((response as any)?.body ?? response);
+    throw new Error(`Resend API error ${status}: ${body}`);
+  }
+}
+
 export async function sendQuoteNotification(data: QuoteEmailData): Promise<void> {
   const subject = `New Quote Request — ${data.name} (${data.serviceType})`;
 
@@ -82,16 +98,12 @@ export async function sendQuoteNotification(data: QuoteEmailData): Promise<void>
 </body>
 </html>`;
 
-  await connectors.proxy("resend", "/emails", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      from: "Air Waves Comfort <quotes@airwavesc.com>",
-      to: ["airwavescomfort33@gmail.com"],
-      subject,
-      html,
-      reply_to: data.email,
-    }),
+  await resendSend({
+    from: "Air Waves Comfort <onboarding@resend.dev>",
+    to: ["airwavescomfort33@gmail.com"],
+    subject,
+    html,
+    reply_to: data.email,
   });
 }
 
@@ -157,14 +169,10 @@ export async function sendQuoteConfirmation(data: QuoteEmailData): Promise<void>
 </body>
 </html>`;
 
-  await connectors.proxy("resend", "/emails", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      from: "Air Waves Comfort <quotes@airwavesc.com>",
-      to: [data.email],
-      subject,
-      html,
-    }),
+  await resendSend({
+    from: "Air Waves Comfort <onboarding@resend.dev>",
+    to: [data.email],
+    subject,
+    html,
   });
 }
