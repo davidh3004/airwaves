@@ -13,17 +13,18 @@ export interface QuoteEmailData {
 
 /** Send a request through the Resend connector and throw if it fails. */
 async function resendSend(payload: object): Promise<void> {
+  // proxy() returns a web Response object
   const response = await connectors.proxy("resend", "/emails", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
   });
 
-  // connectors.proxy resolves even on 4xx/5xx — check explicitly
-  const status: number = (response as any)?.status ?? (response as any)?.statusCode ?? 0;
-  if (status && status >= 400) {
-    const body = JSON.stringify((response as any)?.body ?? response);
-    throw new Error(`Resend API error ${status}: ${body}`);
+  if (!response.ok) {
+    const errorBody = await response.json().catch(() => ({}));
+    throw new Error(
+      `Resend API error ${response.status}: ${JSON.stringify(errorBody)}`
+    );
   }
 }
 
@@ -99,7 +100,7 @@ export async function sendQuoteNotification(data: QuoteEmailData): Promise<void>
 </html>`;
 
   await resendSend({
-    from: "Air Waves Comfort <onboarding@resend.dev>",
+    from: "Air Waves Comfort <quotes@airwavesc.com>",
     to: ["airwavescomfort33@gmail.com"],
     subject,
     html,
@@ -170,7 +171,7 @@ export async function sendQuoteConfirmation(data: QuoteEmailData): Promise<void>
 </html>`;
 
   await resendSend({
-    from: "Air Waves Comfort <onboarding@resend.dev>",
+    from: "Air Waves Comfort <quotes@airwavesc.com>",
     to: [data.email],
     subject,
     html,
