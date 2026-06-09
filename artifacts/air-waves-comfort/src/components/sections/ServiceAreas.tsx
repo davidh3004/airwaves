@@ -1,25 +1,24 @@
 import { MapPin } from "lucide-react";
 import { useSiteContent } from "@/context/SiteContentContext";
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function ServiceAreas() {
   const { serviceAreas, contact } = useSiteContent();
+  const { T } = useLanguage();
+  const A = T.areas;
 
   return (
     <section className="py-24 bg-[#0A2A6E] text-white">
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex flex-col lg:flex-row gap-12 items-center">
           <div className="lg:w-1/3">
-            <h2 className="text-[#00AEEF] font-bold tracking-wider uppercase text-sm mb-3">Service Areas</h2>
-            <h3 className="text-4xl font-bold font-serif mb-6">
-              Serving the Greater Miami Area
-            </h3>
-            <p className="text-white/80 mb-8 text-lg">
-              Air Waves Comfort provides premium HVAC services across Miami-Dade, Broward, and Palm Beach counties. We dispatch technicians from strategic locations to ensure rapid response times.
-            </p>
+            <h2 className="text-[#00AEEF] font-bold tracking-wider uppercase text-sm mb-3">{A.label}</h2>
+            <h3 className="text-4xl font-bold font-serif mb-6">{A.heading}</h3>
+            <p className="text-white/80 mb-8 text-lg">{A.body}</p>
             <div className="flex items-start gap-4 bg-white/10 p-6 rounded-2xl border border-white/20">
               <MapPin className="w-8 h-8 text-[#00AEEF] shrink-0 mt-1" />
               <div>
-                <h4 className="font-bold text-xl mb-2">Main Headquarters</h4>
+                <h4 className="font-bold text-xl mb-2">{A.hq}</h4>
                 <p className="text-white/80">{contact.address}</p>
                 <p className="text-[#00AEEF] font-bold mt-2">{contact.phone1}</p>
               </div>
@@ -34,9 +33,7 @@ export default function ServiceAreas() {
                 </div>
               ))}
             </div>
-            <div className="mt-8 text-center text-white/60 text-sm">
-              Don't see your neighborhood? Call us to check service availability in your area.
-            </div>
+            <div className="mt-8 text-center text-white/60 text-sm">{A.notFound}</div>
           </div>
         </div>
       </div>

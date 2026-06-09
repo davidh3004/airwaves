@@ -3,12 +3,20 @@ import { Link } from "wouter";
 import { Menu, X, PhoneCall } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logoImg from "@assets/vectorized_019ea960-898f-7b41-93b4-d117bb8b21fc_(1)_1780966319118.svg";
-
-const NAV_LINKS = ["Services", "Gallery", "Maintenance", "Reviews", "FAQ"];
+import { useLanguage } from "@/context/LanguageContext";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { lang, setLang, T } = useLanguage();
+
+  const NAV_LINKS = [
+    { label: T.nav.services, href: "#services" },
+    { label: T.nav.gallery, href: "#gallery" },
+    { label: T.nav.maintenance, href: "#maintenance" },
+    { label: T.nav.reviews, href: "#reviews" },
+    { label: T.nav.faq, href: "#faq" },
+  ];
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -28,53 +36,63 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden lg:flex items-center gap-8">
+        <nav className="hidden lg:flex items-center gap-7">
           {NAV_LINKS.map((item) => (
             <a
-              key={item}
-              href={`#${item.toLowerCase()}`}
+              key={item.href}
+              href={item.href}
               className="text-white/90 hover:text-[#00AEEF] font-medium transition-colors text-sm"
-              data-testid={`nav-link-${item.toLowerCase()}`}
             >
-              {item}
+              {item.label}
             </a>
           ))}
         </nav>
 
         {/* Desktop Actions */}
-        <div className="hidden lg:flex items-center gap-4">
+        <div className="hidden lg:flex items-center gap-3">
+          {/* Language Toggle */}
+          <button
+            onClick={() => setLang(lang === "en" ? "es" : "en")}
+            className="flex items-center gap-1 text-white/70 hover:text-white text-xs font-bold border border-white/20 hover:border-white/50 rounded-full px-3 py-1.5 transition-all"
+            aria-label="Switch language"
+          >
+            <span className={lang === "en" ? "text-white" : "text-white/40"}>EN</span>
+            <span className="text-white/30 mx-0.5">|</span>
+            <span className={lang === "es" ? "text-white" : "text-white/40"}>ES</span>
+          </button>
           <a
             href="tel:7863623648"
             className="flex items-center gap-2 text-white font-bold hover:text-[#00AEEF] transition-colors"
-            data-testid="nav-phone"
           >
             <PhoneCall className="w-5 h-5" />
             <span>(786) 362-3648</span>
           </a>
           <a href="tel:7863623648">
-            <Button
-              className="bg-[#00AEEF] hover:bg-[#00AEEF]/90 text-white font-bold rounded-full px-6"
-              data-testid="nav-schedule-btn"
-            >
-              Schedule Service
+            <Button className="bg-[#00AEEF] hover:bg-[#00AEEF]/90 text-white font-bold rounded-full px-6">
+              {T.nav.scheduleService}
             </Button>
           </a>
         </div>
 
-        {/* Mobile: small phone + hamburger */}
-        <div className="lg:hidden flex items-center gap-3 z-50">
+        {/* Mobile: lang + call shortcut + hamburger */}
+        <div className="lg:hidden flex items-center gap-2 z-50">
+          <button
+            onClick={() => setLang(lang === "en" ? "es" : "en")}
+            className="text-white/80 text-xs font-bold border border-white/20 rounded-full px-2.5 py-1 transition-all"
+          >
+            {lang === "en" ? "ES" : "EN"}
+          </button>
           <a
             href="tel:7863623648"
             className="flex items-center gap-1.5 text-white font-bold text-sm bg-[#00AEEF] px-3 py-2 rounded-full"
             aria-label="Call now"
           >
             <PhoneCall className="w-4 h-4" />
-            <span className="hidden sm:inline">Call</span>
+            <span className="hidden sm:inline">{T.nav.call}</span>
           </a>
           <button
             className="text-white p-1.5"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            data-testid="nav-mobile-toggle"
             aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -88,27 +106,21 @@ export default function Navbar() {
           <nav className="flex flex-col gap-5 text-2xl font-bold text-white" style={{ fontFamily: "'Syne', sans-serif" }}>
             {NAV_LINKS.map((item) => (
               <a
-                key={item}
-                href={`#${item.toLowerCase()}`}
+                key={item.href}
+                href={item.href}
                 onClick={() => setMobileMenuOpen(false)}
                 className="border-b border-white/10 pb-4 hover:text-[#00AEEF] transition-colors"
               >
-                {item}
+                {item.label}
               </a>
             ))}
           </nav>
           <div className="mt-4 flex flex-col gap-3">
-            <a
-              href="tel:7863623648"
-              className="flex items-center justify-center gap-2 text-white font-bold text-lg bg-[#00AEEF] py-4 rounded-xl"
-            >
+            <a href="tel:7863623648" className="flex items-center justify-center gap-2 text-white font-bold text-lg bg-[#00AEEF] py-4 rounded-xl">
               <PhoneCall className="w-5 h-5" />
               <span>(786) 362-3648</span>
             </a>
-            <a
-              href="tel:7864242925"
-              className="flex items-center justify-center gap-2 text-white/80 font-bold text-base bg-white/10 py-3 rounded-xl"
-            >
+            <a href="tel:7864242925" className="flex items-center justify-center gap-2 text-white/80 font-bold text-base bg-white/10 py-3 rounded-xl">
               <PhoneCall className="w-4 h-4" />
               <span>(786) 424-2925</span>
             </a>

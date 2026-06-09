@@ -1,5 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
+import { useLanguage } from "@/context/LanguageContext";
 
 function Counter({ end, duration = 2, suffix = "" }: { end: number; duration?: number; suffix?: string }) {
   const [count, setCount] = useState(0);
@@ -12,26 +13,27 @@ function Counter({ end, duration = 2, suffix = "" }: { end: number; duration?: n
       const step = end / (duration * 60);
       const timer = setInterval(() => {
         start += step;
-        if (start >= end) {
-          setCount(end);
-          clearInterval(timer);
-        } else {
-          setCount(Math.floor(start));
-        }
+        if (start >= end) { setCount(end); clearInterval(timer); }
+        else setCount(Math.floor(start));
       }, 1000 / 60);
       return () => clearInterval(timer);
     }
   }, [isInView, end, duration]);
 
-  return (
-    <span ref={ref}>
-      {count}
-      {suffix}
-    </span>
-  );
+  return <span ref={ref}>{count}{suffix}</span>;
 }
 
 export default function ComfortExperience() {
+  const { T } = useLanguage();
+  const C = T.comfort;
+
+  const stats = [
+    { end: 15, suffix: "+", label: C.stats.years },
+    { end: 5000, suffix: "+", label: C.stats.clients },
+    { end: 24, suffix: "/7", label: C.stats.emergency },
+    { end: 100, suffix: "%", label: C.stats.satisfaction },
+  ];
+
   return (
     <section className="py-16 md:py-24 bg-[#0A2A6E] text-white relative overflow-hidden">
       <div className="absolute top-0 right-0 w-1/2 h-full opacity-5 pointer-events-none flex items-center justify-end">
@@ -43,26 +45,12 @@ export default function ComfortExperience() {
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <div className="grid lg:grid-cols-2 gap-10 md:gap-16 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-[#00AEEF] font-bold tracking-wider uppercase text-sm mb-3">The Premium Difference</h2>
-            <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold font-serif mb-5 leading-tight">
-              Crafting Perfect Comfort For Miami Homes.
-            </h3>
-            <p className="text-base md:text-lg text-white/80 mb-6 md:mb-8 font-light">
-              We don't just fix air conditioners; we engineer your home's climate. With 15+ years of dedicated service in Miami, our certified technicians treat your home with the precision and respect it deserves.
-            </p>
+          <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
+            <h2 className="text-[#00AEEF] font-bold tracking-wider uppercase text-sm mb-3">{C.label}</h2>
+            <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold font-serif mb-5 leading-tight">{C.heading}</h3>
+            <p className="text-base md:text-lg text-white/80 mb-6 md:mb-8 font-light">{C.body}</p>
             <ul className="space-y-3 md:space-y-4">
-              {[
-                "NATE-Certified Expert Technicians",
-                "Upfront, Transparent Pricing",
-                "White-Glove Installation Service",
-                "100% Satisfaction Guarantee"
-              ].map((item, i) => (
+              {C.bullets.map((item, i) => (
                 <li key={i} className="flex items-center gap-3">
                   <div className="w-6 h-6 rounded-full bg-[#00AEEF]/20 flex items-center justify-center shrink-0">
                     <div className="w-2 h-2 rounded-full bg-[#00AEEF]" />
@@ -74,20 +62,8 @@ export default function ComfortExperience() {
           </motion.div>
 
           <div className="grid grid-cols-2 gap-4 md:gap-6">
-            {[
-              { end: 15, suffix: "+", label: "Years Experience" },
-              { end: 5000, suffix: "+", label: "Happy Clients" },
-              { end: 24, suffix: "/7", label: "Emergency Service" },
-              { end: 100, suffix: "%", label: "Satisfaction" },
-            ].map((stat, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2 + i * 0.1 }}
-                className="bg-white/5 border border-white/10 rounded-2xl p-5 md:p-8 backdrop-blur-sm"
-              >
+            {stats.map((stat, i) => (
+              <motion.div key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 + i * 0.1 }} className="bg-white/5 border border-white/10 rounded-2xl p-5 md:p-8 backdrop-blur-sm">
                 <div className="text-3xl md:text-5xl font-bold font-serif text-[#00AEEF] mb-1 md:mb-2">
                   <Counter end={stat.end} suffix={stat.suffix} />
                 </div>
