@@ -1,0 +1,136 @@
+Act as a senior creative director, 3D web designer, motion designer, and React developer with 15+ years of experience building premium websites for luxury service brands.
+
+I am uploading an AI-generated Air Waves Comfort homepage concept. Do NOT copy it exactly. Use it only as the foundation and upgrade it heavily.
+
+Goal:
+Build a real, production-ready React + Tailwind website source code for Air Waves Comfort that feels premium, custom, animated, and agency-level.
+
+Brand Rules:
+- Do NOT redesign or alter the logo.
+- Use the real Air Waves Comfort logo.
+- Preserve brand colors:
+  Navy Deep: #0A2A6E
+  Sky Blue: #00AEEF
+  Signal Red: #F72D36
+  Cool Gray: #B3B3B3
+  Ice White: #F4F7FB
+- Use Syne for headlines.
+- Use DM Sans for body copy.
+- Brand feel: expert, warm, direct, reliable, premium, Miami-based.
+
+Tech Stack:
+- React
+- Vite
+- Tailwind CSS
+- Framer Motion
+- Three.js or React Three Fiber for lightweight 3D visuals
+- Fully responsive
+- Clean reusable components
+- Production-ready source code
+- No static image-only mockup
+- No placeholder-only design
+- Must be real code my programmer can clean and deploy
+
+Main Requirement:
+Take the current flat concept and make it feel like a $20,000+ custom HVAC website with motion, depth, glassmorphism, premium interactions, and 3D visual elements.
+
+Design Upgrades Needed:
+1. Hero Section
+- Premium full-screen hero
+- Luxury Miami home visual direction
+- Animated airflow/light wave effect across the hero
+- Floating 3D AC airflow particles or abstract cooling waves
+- Glassmorphism CTA panel
+- Sticky emergency call button
+- Smooth entrance animations
+- Animated trust badges
+
+2. 3D / Motion Elements
+Add tasteful 3D elements, not childish.
+Examples:
+- Animated 3D airflow ribbon
+- Floating cooling particles
+- Subtle rotating HVAC-inspired icon system
+- Interactive service cards with 3D tilt
+- Animated background gradients
+- Scroll-based reveal animations
+- Parallax depth between sections
+
+3. Website Sections
+Build:
+- Header/Nav
+- Hero
+- Trust Bar
+- Services
+- Premium Comfort Experience section
+- Emergency AC Repair section
+- Maintenance Plans
+- Financing section
+- Reviews
+- Service Areas
+- FAQ
+- Final CTA
+- Footer
+
+4. Services
+Include:
+- AC Repair
+- AC Installation
+- AC Maintenance
+- Commercial HVAC
+- Indoor Air Quality
+- Emergency Service
+
+5. Conversion Features
+- “Get a Free Estimate” CTA
+- “Emergency Service” CTA
+- Click-to-call phone number
+- Fast quote form
+- Financing CTA
+- Maintenance plan CTA
+- Review/testimonial cards
+- Trust badges: Licensed & Insured, 15+ Years Experience, Same-Day Service, 5-Star Rated
+
+6. Animations
+Use Framer Motion for:
+- Hero text reveal
+- CTA button hover
+- Service card reveal
+- Testimonial carousel feel
+- Scroll animations
+- Floating elements
+- Section transitions
+
+7. Code Quality
+Important:
+- Create clean folder structure
+- Components should be separated
+- No messy one-file build
+- Use reusable data arrays for services, reviews, FAQs
+- Add comments where useful
+- Make it easy for my programmer to clean and optimize
+- Make sure npm install and npm run dev works
+
+8. SEO
+Add:
+- Title
+- Meta description
+- Open Graph tags
+- Local HVAC keywords
+- Semantic headings
+- Fast-loading structure
+
+9. Visual Standard
+The final result should feel like:
+40% Apple
+20% Tesla
+20% ServiceTitan
+20% Premium Miami HVAC company
+
+Do not make it look like a generic HVAC template.
+Do not make it flat.
+Do not make it boring.
+Do not overuse animations to the point it feels cheap.
+
+Output:
+Generate the actual complete source code structure and files needed to run the project.
