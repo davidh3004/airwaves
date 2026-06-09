@@ -1,5 +1,5 @@
 import { Facebook, Instagram, Twitter } from "lucide-react";
-import logoImg from "@assets/hf_20260609_003428_ae28fd3a-1fd8-4702-a45d-ffe99aa95cfc_1780965584003.png";
+import logoImg from "@assets/vectorized_019ea960-898f-7b41-93b4-d117bb8b21fc_(1)_1780966319118.svg";
 
 export default function Footer() {
   return (
@@ -8,11 +8,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Brand */}
           <div>
-            <div className="flex items-center gap-2 mb-6">
-              <div className="w-10 h-10 rounded-full overflow-hidden border border-white/20">
-                <img src={logoImg} alt="Air Waves Comfort Logo" className="w-full h-full object-cover" />
-              </div>
-              <span className="text-white font-serif font-bold text-xl tracking-tight">Air Waves</span>
+            <div className="mb-6">
+              <img src={logoImg} alt="Air Waves Comfort Logo" className="h-10 w-auto" />
             </div>
             <p className="mb-6 text-sm leading-relaxed">
               Miami's premier HVAC service provider. Expert, warm, direct, reliable, and unmistakably premium.

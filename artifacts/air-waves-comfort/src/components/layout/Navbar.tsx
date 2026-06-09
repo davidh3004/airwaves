@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { Menu, X, PhoneCall } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import logoImg from "@assets/hf_20260609_003428_ae28fd3a-1fd8-4702-a45d-ffe99aa95cfc_1780965584003.png";
+import logoImg from "@assets/vectorized_019ea960-898f-7b41-93b4-d117bb8b21fc_(1)_1780966319118.svg";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -21,11 +21,8 @@ export default function Navbar() {
       }`}
     >
       <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2 z-50">
-          <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-white/20">
-            <img src={logoImg} alt="Air Waves Comfort" className="w-full h-full object-cover" />
-          </div>
-          <span className="text-white font-serif font-bold text-xl tracking-tight">Air Waves</span>
+        <Link href="/" className="flex items-center z-50">
+          <img src={logoImg} alt="Air Waves Comfort" className="h-10 w-auto" />
         </Link>
 
         {/* Desktop Nav */}
