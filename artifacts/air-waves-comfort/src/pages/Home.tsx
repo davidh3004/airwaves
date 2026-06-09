@@ -10,6 +10,7 @@ import Gallery from "@/components/sections/Gallery";
 import Reviews from "@/components/sections/Reviews";
 import ServiceAreas from "@/components/sections/ServiceAreas";
 import FAQ from "@/components/sections/FAQ";
+import QuoteForm from "@/components/sections/QuoteForm";
 import FinalCTA from "@/components/sections/FinalCTA";
 import MobileCallBar from "@/components/MobileCallBar";
 
@@ -28,6 +29,7 @@ export default function Home() {
         <Reviews />
         <ServiceAreas />
         <FAQ />
+        <QuoteForm />
         <FinalCTA />
       </main>
       <Footer />
