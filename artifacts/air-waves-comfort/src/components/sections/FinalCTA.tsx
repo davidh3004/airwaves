@@ -1,7 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { PhoneCall, Calendar } from "lucide-react";
+import { useSiteContent } from "@/context/SiteContentContext";
 
 export default function FinalCTA() {
+  const { contact } = useSiteContent();
+
   return (
     <section className="py-24 bg-gradient-to-br from-[#0A2A6E] to-[#05153A] text-white relative overflow-hidden">
       <div className="absolute inset-0 opacity-20 pointer-events-none">
@@ -20,9 +23,9 @@ export default function FinalCTA() {
           <Button className="h-14 px-8 bg-[#00AEEF] hover:bg-[#00AEEF]/90 text-white font-bold text-lg rounded-full">
             <Calendar className="mr-2 h-5 w-5" /> Schedule Service Now
           </Button>
-          <a href="tel:7863623648">
+          <a href={`tel:${contact.phone1.replace(/\D/g, '')}`}>
             <Button variant="outline" className="h-14 px-8 bg-transparent border-2 border-white hover:bg-white hover:text-[#0A2A6E] text-white font-bold text-lg rounded-full w-full sm:w-auto">
-              <PhoneCall className="mr-2 h-5 w-5" /> Call (786) 362-3648
+              <PhoneCall className="mr-2 h-5 w-5" /> Call {contact.phone1}
             </Button>
           </a>
         </div>

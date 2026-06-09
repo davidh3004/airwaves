@@ -1,54 +1,11 @@
 import { motion } from "framer-motion";
 import { Check, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
-const plans = [
-  {
-    name: "Basic Care",
-    price: "15",
-    period: "/mo",
-    description: "Essential preventative maintenance for a single system.",
-    features: [
-      "2 Maintenance Visits/Year",
-      "Standard Filter Replacement",
-      "Condenser Coil Cleaning",
-      "System Performance Check",
-      "5% Off Repairs"
-    ]
-  },
-  {
-    name: "Comfort Plus",
-    price: "25",
-    period: "/mo",
-    description: "Comprehensive coverage and priority service for ultimate peace of mind.",
-    features: [
-      "2 Maintenance Visits/Year",
-      "Premium Filter Replacement",
-      "Deep Coil & Blower Cleaning",
-      "Priority Scheduling (24hr)",
-      "No Emergency Fees",
-      "15% Off Repairs"
-    ],
-    highlight: true
-  },
-  {
-    name: "Premium Elite",
-    price: "45",
-    period: "/mo",
-    description: "The ultimate white-glove service for multiple systems or large homes.",
-    features: [
-      "4 Maintenance Visits/Year",
-      "HEPA Filter Replacements",
-      "Duct Inspection & Sanitization",
-      "VIP Front-of-Line Service",
-      "No Emergency Fees",
-      "20% Off Repairs",
-      "Annual IAQ Assessment"
-    ]
-  }
-];
+import { useSiteContent } from "@/context/SiteContentContext";
 
 export default function MaintenancePlans() {
+  const { maintenancePlans } = useSiteContent();
+
   return (
     <section id="maintenance" className="py-24 bg-white">
       <div className="container mx-auto px-4 md:px-6">
@@ -63,7 +20,7 @@ export default function MaintenancePlans() {
         </div>
 
         <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto items-center">
-          {plans.map((plan, index) => (
+          {maintenancePlans.map((plan, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}

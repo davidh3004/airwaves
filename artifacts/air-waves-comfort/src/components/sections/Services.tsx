@@ -1,42 +1,19 @@
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import { Wrench, ThermometerSun, PenTool, Building2, Wind, AlertTriangle, ArrowRight } from "lucide-react";
 import { useRef } from "react";
+import { useSiteContent } from "@/context/SiteContentContext";
 
-const services = [
-  {
-    title: "AC Repair",
-    description: "Fast, reliable diagnostics and repair to get your system cooling again.",
-    icon: Wrench,
-  },
-  {
-    title: "AC Installation",
-    description: "Premium high-efficiency system replacements with expert sizing.",
-    icon: ThermometerSun,
-  },
-  {
-    title: "AC Maintenance",
-    description: "Preventative tune-ups to extend lifespan and lower energy bills.",
-    icon: PenTool,
-  },
-  {
-    title: "Commercial HVAC",
-    description: "Heavy-duty solutions for Miami businesses and industrial spaces.",
-    icon: Building2,
-  },
-  {
-    title: "Indoor Air Quality",
-    description: "Advanced filtration and UV purification for healthier breathing.",
-    icon: Wind,
-  },
-  {
-    title: "Emergency Service",
-    description: "24/7 rapid response when you need cooling the most.",
-    icon: AlertTriangle,
-    highlight: true,
-  },
-];
+const ICON_MAP: Record<string, any> = {
+  Wrench,
+  ThermometerSun,
+  PenTool,
+  Building2,
+  Wind,
+  AlertTriangle,
+};
 
-function ServiceCard({ service, index }: { service: typeof services[0]; index: number }) {
+function ServiceCard({ service, index }: { service: any; index: number }) {
+  const Icon = ICON_MAP[service.icon] || Wrench;
   const cardRef = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -82,7 +59,7 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
       <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-6 shadow-sm ${
         service.highlight ? "bg-[#F72D36] text-white" : "bg-[#F4F7FB] text-[#0A2A6E]"
       }`} style={{ transform: "translateZ(30px)" }}>
-        <service.icon className="w-7 h-7" />
+        <Icon className="w-7 h-7" />
       </div>
       
       <h3 className="text-xl font-bold text-[#0A2A6E] mb-3 font-serif" style={{ transform: "translateZ(40px)" }}>
@@ -103,6 +80,8 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
 }
 
 export default function Services() {
+  const { services } = useSiteContent();
+
   return (
     <section id="services" className="py-24 bg-[#F4F7FB]">
       <div className="container mx-auto px-4 md:px-6">

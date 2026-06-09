@@ -2,8 +2,11 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import AirflowParticles from "../three/AirflowParticles";
 import { PhoneCall, Calendar } from "lucide-react";
+import { useSiteContent } from "@/context/SiteContentContext";
 
 export default function Hero() {
+  const { hero } = useSiteContent();
+
   return (
     <section className="relative w-full h-[100dvh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-[#0A2A6E] via-[#081B4B] to-black">
       {/* Canvas-based particle background */}
@@ -59,26 +62,25 @@ export default function Hero() {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="max-w-4xl"
         >
-          <motion.span
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="inline-block py-1 px-4 rounded-full bg-white/10 border border-[#00AEEF]/40 text-[#00AEEF] font-semibold text-sm mb-6 backdrop-blur-sm tracking-wide uppercase"
-          >
-            Miami's Premier Climate Control
-          </motion.span>
+          {hero.tag && (
+            <motion.span
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="inline-block py-1 px-4 rounded-full bg-white/10 border border-[#00AEEF]/40 text-[#00AEEF] font-semibold text-sm mb-6 backdrop-blur-sm tracking-wide uppercase"
+            >
+              {hero.tag}
+            </motion.span>
+          )}
 
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.3 }}
-            className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-tight"
+            className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-tight whitespace-pre-line"
             style={{ fontFamily: "'Syne', sans-serif" }}
           >
-            Where Experience <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00AEEF] to-[#F4F7FB]">
-              Meets Cool.
-            </span>
+            {hero.headline}
           </motion.h1>
 
           <motion.p
@@ -88,7 +90,7 @@ export default function Hero() {
             className="text-lg md:text-2xl text-white/80 mb-10 max-w-2xl mx-auto"
             style={{ fontFamily: "'DM Sans', sans-serif" }}
           >
-            Miami's Most Trusted HVAC Service — 15+ Years of Excellence.
+            {hero.subheadline}
           </motion.p>
 
           <motion.div
@@ -102,7 +104,7 @@ export default function Hero() {
               data-testid="hero-cta-estimate"
             >
               <Calendar className="mr-2 h-5 w-5" />
-              Get a Free Estimate
+              {hero.ctaEstimate}
             </Button>
             <a href="tel:7863623648" className="w-full sm:w-auto" data-testid="hero-link-emergency">
               <Button
@@ -111,7 +113,7 @@ export default function Hero() {
                 data-testid="hero-cta-emergency"
               >
                 <PhoneCall className="mr-2 h-5 w-5 animate-pulse" />
-                Emergency Service
+                {hero.ctaEmergency}
               </Button>
             </a>
           </motion.div>

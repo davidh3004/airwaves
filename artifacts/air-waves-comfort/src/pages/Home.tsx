@@ -6,7 +6,7 @@ import Services from "@/components/sections/Services";
 import ComfortExperience from "@/components/sections/ComfortExperience";
 import EmergencyRepair from "@/components/sections/EmergencyRepair";
 import MaintenancePlans from "@/components/sections/MaintenancePlans";
-import Financing from "@/components/sections/Financing";
+import Gallery from "@/components/sections/Gallery";
 import Reviews from "@/components/sections/Reviews";
 import ServiceAreas from "@/components/sections/ServiceAreas";
 import FAQ from "@/components/sections/FAQ";
@@ -20,10 +20,10 @@ export default function Home() {
         <Hero />
         <TrustBar />
         <Services />
+        <Gallery />
         <ComfortExperience />
         <EmergencyRepair />
         <MaintenancePlans />
-        <Financing />
         <Reviews />
         <ServiceAreas />
         <FAQ />

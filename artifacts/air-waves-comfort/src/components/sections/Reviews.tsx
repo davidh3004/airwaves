@@ -1,47 +1,10 @@
 import useEmblaCarousel from "embla-carousel-react";
 import { useEffect } from "react";
 import { Star, Quote } from "lucide-react";
-
-const reviews = [
-  {
-    name: "Maria Rodriguez",
-    location: "Coral Gables",
-    text: "My AC died on a Sunday in July. Air Waves Comfort was here within 2 hours. The technician was incredibly professional, wore shoe covers, and fixed the capacitor quickly. Worth every penny.",
-    rating: 5,
-  },
-  {
-    name: "James Chen",
-    location: "Brickell",
-    text: "Replaced our entire 15-year-old system. The sales process was zero pressure, pricing was transparent, and the installation crew left my condo cleaner than they found it.",
-    rating: 5,
-  },
-  {
-    name: "Sarah Jenkins",
-    location: "Pinecrest",
-    text: "I've been using their Comfort Plus maintenance plan for 3 years. My electric bills are lower, and the system runs perfectly. It's so refreshing to find an honest HVAC company in Miami.",
-    rating: 5,
-  },
-  {
-    name: "David Alverez",
-    location: "Coconut Grove",
-    text: "Called them for a second opinion after another company told me I needed a whole new unit. Air Waves fixed a minor leak and recharged the freon. Saved me thousands.",
-    rating: 5,
-  },
-  {
-    name: "Elena Thompson",
-    location: "Aventura",
-    text: "Top-tier service from start to finish. The office staff is communicative, dispatch lets you know when they are arriving, and the techs are experts.",
-    rating: 5,
-  },
-  {
-    name: "Michael Torres",
-    location: "Miami Beach",
-    text: "They installed a new high-efficiency system and a whole-home UV purifier. The air quality difference in our home is night and day. Highly recommend Air Waves.",
-    rating: 5,
-  },
-];
+import { useSiteContent } from "@/context/SiteContentContext";
 
 export default function Reviews() {
+  const { reviews } = useSiteContent();
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "start" });
 
   useEffect(() => {

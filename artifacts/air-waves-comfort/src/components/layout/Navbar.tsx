@@ -27,7 +27,7 @@ export default function Navbar() {
 
         {/* Desktop Nav */}
         <nav className="hidden lg:flex items-center gap-8">
-          {["Services", "Maintenance", "Financing", "Reviews", "FAQ"].map((item) => (
+          {["Services", "Gallery", "Maintenance", "Reviews", "FAQ"].map((item) => (
             <a
               key={item}
               href={`#${item.toLowerCase()}`}
@@ -71,7 +71,7 @@ export default function Navbar() {
       {mobileMenuOpen && (
         <div className="fixed inset-0 bg-[#0A2A6E] pt-24 px-6 z-40 flex flex-col gap-6 lg:hidden">
           <nav className="flex flex-col gap-4 text-2xl font-serif text-white">
-            {["Services", "Maintenance", "Financing", "Reviews", "FAQ"].map((item) => (
+            {["Services", "Gallery", "Maintenance", "Reviews", "FAQ"].map((item) => (
               <a
                 key={item}
                 href={`#${item.toLowerCase()}`}

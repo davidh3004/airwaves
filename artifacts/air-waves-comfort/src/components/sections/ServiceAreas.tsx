@@ -1,11 +1,8 @@
 import { MapPin } from "lucide-react";
+import { useSiteContent } from "@/context/SiteContentContext";
 
 export default function ServiceAreas() {
-  const areas = [
-    "Coral Gables", "Brickell", "Pinecrest", "Coconut Grove", 
-    "Aventura", "Miami Beach", "Kendall", "Doral", 
-    "South Miami", "Key Biscayne", "Sunny Isles", "Palmetto Bay"
-  ];
+  const { serviceAreas, contact } = useSiteContent();
 
   return (
     <section className="py-24 bg-[#0A2A6E] text-white">
@@ -23,15 +20,15 @@ export default function ServiceAreas() {
               <MapPin className="w-8 h-8 text-[#00AEEF] shrink-0 mt-1" />
               <div>
                 <h4 className="font-bold text-xl mb-2">Main Headquarters</h4>
-                <p className="text-white/80">Miami, FL 33173</p>
-                <p className="text-[#00AEEF] font-bold mt-2">(786) 362-3648</p>
+                <p className="text-white/80">{contact.address}</p>
+                <p className="text-[#00AEEF] font-bold mt-2">{contact.phone1}</p>
               </div>
             </div>
           </div>
 
           <div className="lg:w-2/3 w-full">
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-              {areas.map((area, idx) => (
+              {serviceAreas.map((area, idx) => (
                 <div key={idx} className="bg-white/5 border border-white/10 rounded-xl p-4 text-center hover:bg-[#00AEEF]/20 hover:border-[#00AEEF] transition-colors cursor-default">
                   <span className="font-medium text-sm md:text-base">{area}</span>
                 </div>

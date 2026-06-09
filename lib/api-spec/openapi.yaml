@@ -10,6 +10,10 @@ servers:
 tags:
   - name: health
     description: Health operations
+  - name: content
+    description: Site content management
+  - name: admin
+    description: Admin operations
 paths:
   /healthz:
     get:
@@ -24,6 +28,95 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+  /content:
+    get:
+      operationId: getContent
+      tags: [content]
+      summary: Get site content
+      description: Returns the full site content. Public access.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SiteContent"
+  /admin/content:
+    get:
+      operationId: getAdminContent
+      tags: [admin]
+      summary: Get site content (protected)
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SiteContent"
+        "401":
+          description: Unauthorized
+    put:
+      operationId: updateContent
+      tags: [admin]
+      summary: Update site content section
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ContentUpdate"
+      responses:
+        "200":
+          description: OK
+        "401":
+          description: Unauthorized
+  /admin/login:
+    post:
+      operationId: login
+      tags: [admin]
+      summary: Admin login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginInput"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+        "401":
+          description: Invalid password
+  /admin/logout:
+    post:
+      operationId: logout
+      tags: [admin]
+      summary: Admin logout
+      responses:
+        "200":
+          description: OK
+  /admin/me:
+    get:
+      operationId: getMe
+      tags: [admin]
+      summary: Get current session status
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  authenticated:
+                    type: boolean
+
 components:
   schemas:
     HealthStatus:
@@ -33,4 +126,112 @@ components:
           type: string
       required:
         - status
+    SiteContent:
+      type: object
+      required: [hero, services, reviews, maintenancePlans, trustBadges, faq, serviceAreas, contact, gallery]
+      properties:
+        hero:
+          $ref: "#/components/schemas/HeroContent"
+        services:
+          type: array
+          items:
+            $ref: "#/components/schemas/Service"
+        reviews:
+          type: array
+          items:
+            $ref: "#/components/schemas/Review"
+        maintenancePlans:
+          type: array
+          items:
+            $ref: "#/components/schemas/MaintenancePlan"
+        trustBadges:
+          type: array
+          items:
+            type: object
+            properties:
+              label: { type: string }
+        faq:
+          type: array
+          items:
+            $ref: "#/components/schemas/FaqItem"
+        serviceAreas:
+          type: array
+          items:
+            type: string
+        contact:
+          $ref: "#/components/schemas/ContactInfo"
+        gallery:
+          type: array
+          items:
+            $ref: "#/components/schemas/GalleryItem"
+    HeroContent:
+      type: object
+      required: [headline, subheadline, ctaEstimate, ctaEmergency]
+      properties:
+        headline: { type: string }
+        subheadline: { type: string }
+        ctaEstimate: { type: string }
+        ctaEmergency: { type: string }
+        tag: { type: string }
+    Service:
+      type: object
+      required: [title, description, icon]
+      properties:
+        title: { type: string }
+        description: { type: string }
+        icon: { type: string }
+        highlight: { type: boolean }
+    Review:
+      type: object
+      required: [name, location, text, rating]
+      properties:
+        name: { type: string }
+        location: { type: string }
+        text: { type: string }
+        rating: { type: integer }
+    MaintenancePlan:
+      type: object
+      required: [name, price, period, features]
+      properties:
+        name: { type: string }
+        price: { type: string }
+        period: { type: string }
+        description: { type: string }
+        features:
+          type: array
+          items: { type: string }
+        highlight: { type: boolean }
+    FaqItem:
+      type: object
+      required: [question, answer]
+      properties:
+        question: { type: string }
+        answer: { type: string }
+    ContactInfo:
+      type: object
+      required: [phone1, phone2, address, website, license]
+      properties:
+        phone1: { type: string }
+        phone2: { type: string }
+        address: { type: string }
+        website: { type: string }
+        license: { type: string }
+    GalleryItem:
+      type: object
+      required: [src, alt, label]
+      properties:
+        src: { type: string }
+        alt: { type: string }
+        label: { type: string }
+    ContentUpdate:
+      type: object
+      required: [key, value]
+      properties:
+        key: { type: string }
+        value: { type: object }
+    LoginInput:
+      type: object
+      required: [password]
+      properties:
+        password: { type: string }
 

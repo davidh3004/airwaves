@@ -1,7 +1,10 @@
 import { motion } from "framer-motion";
 import { PhoneCall, Clock } from "lucide-react";
+import { useSiteContent } from "@/context/SiteContentContext";
 
 export default function EmergencyRepair() {
+  const { contact } = useSiteContent();
+
   return (
     <section className="bg-[#F72D36] py-16 text-white relative overflow-hidden">
       {/* Background pattern */}
@@ -32,14 +35,14 @@ export default function EmergencyRepair() {
           >
             <div className="absolute inset-0 rounded-full bg-white/30 blur-xl animate-pulse"></div>
             <a 
-              href="tel:7863623648" 
+              href={`tel:${contact.phone1.replace(/\D/g, '')}`} 
               className="relative flex items-center gap-4 bg-white text-[#F72D36] px-8 py-5 rounded-full font-bold text-2xl md:text-3xl shadow-2xl hover:bg-gray-50 transition-colors group"
               data-testid="emergency-call-btn"
             >
               <div className="bg-[#F72D36]/10 p-3 rounded-full group-hover:bg-[#F72D36]/20 transition-colors">
                 <PhoneCall className="w-8 h-8" />
               </div>
-              (786) 362-3648
+              {contact.phone1}
             </a>
           </motion.div>
         </div>
