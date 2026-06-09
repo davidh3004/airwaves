@@ -11,12 +11,13 @@ import Reviews from "@/components/sections/Reviews";
 import ServiceAreas from "@/components/sections/ServiceAreas";
 import FAQ from "@/components/sections/FAQ";
 import FinalCTA from "@/components/sections/FinalCTA";
+import MobileCallBar from "@/components/MobileCallBar";
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-[#F4F7FB] font-sans selection:bg-[#00AEEF] selection:text-white">
       <Navbar />
-      <main>
+      <main className="pb-[68px] md:pb-0">
         <Hero />
         <TrustBar />
         <Services />
@@ -30,6 +31,7 @@ export default function Home() {
         <FinalCTA />
       </main>
       <Footer />
+      <MobileCallBar />
     </div>
   );
 }

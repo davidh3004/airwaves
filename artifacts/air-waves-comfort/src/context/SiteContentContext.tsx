@@ -207,9 +207,9 @@ export const DEFAULTS: SiteContent = {
   ],
   contact: {
     phone1: "(786) 362-3648",
-    phone2: "(786) 362-3648",
-    address: "Miami, FL 33173",
-    website: "www.airwavescomfort.com",
+    phone2: "(786) 424-2925",
+    address: "9802 NW 80 Ave Bay G48, Hialeah Gardens, FL 33016",
+    website: "airwavesc.com",
     license: "#CAC1820880",
   },
 };
