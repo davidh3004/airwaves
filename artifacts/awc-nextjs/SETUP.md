@@ -104,13 +104,14 @@ These are listed in `.gitignore`.
 
 1. Import the GitHub repo at [vercel.com/new](https://vercel.com/new).
 2. **Root Directory:** `artifacts/awc-nextjs` (required)
-3. **Framework:** Next.js (auto-detected)
-4. **Build command:** leave default (`next build`) or use `pnpm run build` — do **not** use the monorepo root `pnpm run build:all` (that typechecks every package).
-5. **Install command:** `cd ../.. && pnpm install` (from `artifacts/awc-nextjs`)
-6. Add **all** environment variables from `.env.local` in **Settings → Environment Variables**.
-7. Deploy.
+3. **Framework Preset:** Next.js (must **not** be "Other")
+4. **Output Directory:** leave **empty** (do not set `public` — Next.js uses `.next` automatically)
+5. **Build command:** leave empty (uses `vercel.json` → `next build`) — do **not** use `pnpm run build:all`
+6. **Install command:** `cd ../.. && pnpm install` (when Root Directory is `artifacts/awc-nextjs`)
+7. Add **all** environment variables from `.env.local` in **Settings → Environment Variables**.
+8. Deploy.
 
-If the Vercel project root is the **repo root** instead, the root `vercel.json` and `package.json` `build` script already scope the build to `@workspace/awc-nextjs` only.
+If Root Directory is the **repo root** instead, the root `vercel.json` sets `"framework": "nextjs"` so Vercel does not look for a static `public` output folder.
 
 Set `NEXT_PUBLIC_SITE_URL` to your production URL (e.g. `https://airwavesc.com`).
 
