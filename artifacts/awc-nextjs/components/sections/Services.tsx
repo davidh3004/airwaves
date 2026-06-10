@@ -1,8 +1,17 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Wrench, Settings, CheckCircle2, Building2, Wind, Zap } from "lucide-react";
+import {
+  Wrench,
+  Settings,
+  CheckCircle2,
+  Building2,
+  Wind,
+  Zap,
+} from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+import Aurora from "@/components/ui/Aurora";
+import TiltCard from "@/components/ui/TiltCard";
 
 const ICONS = [Wrench, Settings, CheckCircle2, Building2, Wind, Zap];
 
@@ -11,8 +20,12 @@ export default function Services() {
   const S = T.services;
 
   return (
-    <section id="services" className="section-pad bg-[#040e26]">
-      <div className="max-w-7xl mx-auto">
+    <section
+      id="services"
+      className="section-pad relative overflow-hidden bg-[#040e26] noise-overlay"
+    >
+      <Aurora intensity="subtle" />
+      <div className="relative z-10 max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-14">
           <motion.span
@@ -51,37 +64,49 @@ export default function Services() {
             return (
               <motion.div
                 key={item.title}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.07 }}
-                className={`group relative rounded-2xl p-7 border transition-all duration-300 hover:-translate-y-1 ${
-                  isHighlight
-                    ? "bg-gradient-to-br from-red-brand/20 to-[#0A2A6E] border-red-brand/30 shadow-lg shadow-red-brand/10"
-                    : "glass border-white/8 hover:border-sky-brand/30"
-                }`}
+                transition={{ delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
               >
-                <div
-                  className={`w-11 h-11 rounded-xl flex items-center justify-center mb-5 ${
-                    isHighlight ? "bg-red-brand/20" : "bg-sky-brand/10"
-                  }`}
-                >
-                  <Icon
-                    className={`w-5 h-5 ${isHighlight ? "text-red-brand" : "text-sky-brand"}`}
-                  />
-                </div>
-                <h3 className="font-serif text-lg font-bold mb-2">{item.title}</h3>
-                <p className="text-white/50 text-sm leading-relaxed">{item.description}</p>
-                <a
-                  href="#quote"
-                  className={`mt-5 inline-flex items-center gap-1.5 text-sm font-medium transition-colors ${
-                    isHighlight
-                      ? "text-red-brand hover:text-red-400"
-                      : "text-sky-brand hover:text-sky-300"
-                  }`}
-                >
-                  {S.learnMore} →
-                </a>
+                <TiltCard className="group h-full rounded-2xl" max={7}>
+                  <div
+                    className={`relative flex h-full flex-col rounded-2xl border p-7 transition-colors duration-300 [transform-style:preserve-3d] ${
+                      isHighlight
+                        ? "border-red-brand/30 bg-gradient-to-br from-red-brand/20 to-[#0A2A6E] shadow-glow-red"
+                        : "glass-panel hover:border-sky-brand/30"
+                    }`}
+                  >
+                    <div
+                      className={`mb-5 flex h-12 w-12 items-center justify-center rounded-xl [transform:translateZ(30px)] ${
+                        isHighlight ? "bg-red-brand/20" : "bg-sky-brand/10"
+                      }`}
+                    >
+                      {/* Icon does a slow continuous rotation on hover */}
+                      <Icon
+                        className={`h-5 w-5 transition-transform duration-700 group-hover:rotate-[360deg] ${
+                          isHighlight ? "text-red-brand" : "text-sky-brand"
+                        }`}
+                      />
+                    </div>
+                    <h3 className="mb-2 font-serif text-lg font-bold [transform:translateZ(24px)]">
+                      {item.title}
+                    </h3>
+                    <p className="flex-1 text-sm leading-relaxed text-white/50 [transform:translateZ(14px)]">
+                      {item.description}
+                    </p>
+                    <a
+                      href="#quote"
+                      className={`mt-5 inline-flex items-center gap-1.5 text-sm font-medium transition-colors [transform:translateZ(24px)] ${
+                        isHighlight
+                          ? "text-red-brand hover:text-red-400"
+                          : "text-sky-brand hover:text-sky-300"
+                      }`}
+                    >
+                      {S.learnMore} →
+                    </a>
+                  </div>
+                </TiltCard>
               </motion.div>
             );
           })}

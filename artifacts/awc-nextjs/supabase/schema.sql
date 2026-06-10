@@ -56,9 +56,8 @@ create policy "Service role manages quotes"
   on quote_submissions for all
   using (auth.role() = 'service_role');
 
--- ── Optional: Seed default site settings ───────────────────────────────────
--- You can seed the content here or let the app use its built-in defaults.
--- Example:
--- insert into site_settings (key, value) values
---   ('hero', '{"tag":"Miami''s Premier Climate Control","headline":"Where Experience Meets Cool.","subheadline":"Miami''s Most Trusted HVAC Service — 15+ Years of Excellence.","ctaEstimate":"Get a Free Estimate","ctaEmergency":"Emergency Service"}'::jsonb)
--- on conflict (key) do nothing;
+-- ── Content keys (written by admin CMS) ─────────────────────────────────────
+-- The app stores full bilingual copy under:
+--   content_en  — English SiteContent JSON
+--   content_es  — Spanish SiteContent JSON
+-- No seed required: the site uses built-in defaults until you save from /admin.

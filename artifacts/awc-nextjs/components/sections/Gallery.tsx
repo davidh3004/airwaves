@@ -5,26 +5,17 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 
-const IMAGES = [
-  { src: "/gallery/van-mansion.png",       alt: "Air Waves Comfort van at luxury home",        label: "Residential Service" },
-  { src: "/gallery/van-residential.png",   alt: "Air Waves Comfort van at residential property",label: "Home Installation" },
-  { src: "/gallery/commercial-1.jpeg",     alt: "Commercial HVAC unit installation",            label: "Commercial Project" },
-  { src: "/gallery/commercial-2.jpeg",     alt: "Commercial HVAC rooftop unit",                 label: "Rooftop Unit" },
-  { src: "/gallery/commercial-3.jpeg",     alt: "Commercial HVAC system",                       label: "Industrial HVAC" },
-  { src: "/gallery/goodman-unit.jpeg",     alt: "Goodman AC unit installation",                 label: "AC Installation" },
-  { src: "/gallery/van-fleet.png",         alt: "Air Waves Comfort service fleet",              label: "Our Fleet" },
-  { src: "/gallery/van-duo.jpeg",          alt: "Air Waves Comfort service vehicles",           label: "Expert Team" },
-  { src: "/gallery/vans-back.jpeg",        alt: "Air Waves Comfort vans stocked with equipment",label: "Fully Equipped" },
-];
-
 export default function Gallery() {
   const { T } = useLanguage();
+  const images = T.gallery.images;
   const [lightbox, setLightbox] = useState<number | null>(null);
 
   const prev = () =>
-    setLightbox((i) => (i !== null ? (i - 1 + IMAGES.length) % IMAGES.length : null));
+    setLightbox((i) =>
+      i !== null ? (i - 1 + images.length) % images.length : null,
+    );
   const next = () =>
-    setLightbox((i) => (i !== null ? (i + 1) % IMAGES.length : null));
+    setLightbox((i) => (i !== null ? (i + 1) % images.length : null));
 
   return (
     <section id="gallery" className="section-pad bg-[#060f24]">
@@ -52,9 +43,9 @@ export default function Gallery() {
 
         {/* Grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
-          {IMAGES.map((img, i) => (
+          {images.map((img, i) => (
             <motion.div
-              key={img.src}
+              key={`${img.src}-${i}`}
               initial={{ opacity: 0, scale: 0.97 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
@@ -96,20 +87,26 @@ export default function Gallery() {
             </button>
             <button
               className="absolute left-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white p-2"
-              onClick={(e) => { e.stopPropagation(); prev(); }}
+              onClick={(e) => {
+                e.stopPropagation();
+                prev();
+              }}
             >
               <ChevronLeft className="w-8 h-8" />
             </button>
             <button
               className="absolute right-4 top-1/2 -translate-y-1/2 text-white/70 hover:text-white p-2"
-              onClick={(e) => { e.stopPropagation(); next(); }}
+              onClick={(e) => {
+                e.stopPropagation();
+                next();
+              }}
             >
               <ChevronRight className="w-8 h-8" />
             </button>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={IMAGES[lightbox].src}
-              alt={IMAGES[lightbox].alt}
+              src={images[lightbox].src}
+              alt={images[lightbox].alt}
               className="max-h-[85vh] max-w-[90vw] object-contain rounded-lg"
               onClick={(e) => e.stopPropagation()}
             />

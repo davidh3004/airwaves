@@ -1,69 +1,29 @@
 import { NextResponse } from "next/server";
-import { createServiceClient } from "@/lib/supabase";
+import { getSiteContent } from "@/lib/cms";
+import type { Lang } from "@/i18n/translations";
 
 /**
- * GET /api/content?key=<key>
- * Returns a single site_settings value.
- * Returns all settings when key is omitted.
+ * GET /api/content?lang=en|es
+ * Public — returns merged site copy for the requested language.
  */
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const key = searchParams.get("key");
+  const lang = searchParams.get("lang");
 
-  try {
-    const supabase = createServiceClient();
-
-    if (key) {
-      const { data, error } = await supabase
-        .from("site_settings")
-        .select("key, value")
-        .eq("key", key)
-        .single();
-
-      if (error) return NextResponse.json({ error: error.message }, { status: 404 });
-      return NextResponse.json(data);
-    }
-
-    const { data, error } = await supabase
-      .from("site_settings")
-      .select("key, value");
-
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
-    return NextResponse.json(data ?? []);
-  } catch (err) {
+  if (lang !== "en" && lang !== "es") {
     return NextResponse.json(
-      { error: err instanceof Error ? err.message : "Internal error" },
-      { status: 500 }
+      { error: "lang query param must be en or es" },
+      { status: 400 },
     );
   }
-}
 
-/**
- * PUT /api/content
- * Body: { key: string; value: unknown }
- * Updates or inserts a site_settings row.
- * Protected — requires valid admin session (checked in middleware).
- */
-export async function PUT(request: Request) {
   try {
-    const body = await request.json();
-    const { key, value } = body as { key: string; value: unknown };
-
-    if (!key || value === undefined) {
-      return NextResponse.json({ error: "key and value are required" }, { status: 400 });
-    }
-
-    const supabase = createServiceClient();
-    const { error } = await supabase
-      .from("site_settings")
-      .upsert({ key, value }, { onConflict: "key" });
-
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
-    return NextResponse.json({ ok: true });
+    const content = await getSiteContent(lang as Lang);
+    return NextResponse.json(content);
   } catch (err) {
     return NextResponse.json(
       { error: err instanceof Error ? err.message : "Internal error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

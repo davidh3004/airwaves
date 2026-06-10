@@ -7,9 +7,15 @@ const PROTECTED_PATHS = ["/admin", "/api/content"];
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // Public read of site content
+  if (pathname === "/api/content" && request.method === "GET") {
+    return NextResponse.next();
+  }
+
   const isProtected =
     PROTECTED_PATHS.some((p) => pathname.startsWith(p)) &&
-    !pathname.startsWith("/api/admin");
+    !pathname.startsWith("/api/admin") &&
+    pathname !== "/admin/login";
 
   if (!isProtected) return NextResponse.next();
 

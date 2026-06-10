@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { Award, ShieldCheck, Star, Clock, CreditCard } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 
@@ -9,24 +8,26 @@ const ICONS = [Award, ShieldCheck, Star, Clock, CreditCard];
 export default function TrustBar() {
   const { T } = useLanguage();
 
+  // Duplicate the badge set so the marquee can loop seamlessly (-50% shift)
+  const track = [...T.trustBadges, ...T.trustBadges];
+
   return (
-    <section className="bg-[#060f24] border-y border-white/5 py-6 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="flex flex-wrap justify-center gap-x-10 gap-y-4">
-          {T.trustBadges.map((badge, i) => {
+    <section className="relative z-20 overflow-hidden border-y border-white/5 bg-[#060f24] py-6">
+      <div className="mask-fade-x mx-auto max-w-7xl">
+        <div className="flex w-max animate-marquee items-center gap-x-12 hover:[animation-play-state:paused]">
+          {track.map((badge, i) => {
             const Icon = ICONS[i % ICONS.length];
             return (
-              <motion.div
-                key={badge.label}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                className="flex items-center gap-2.5 text-white/70"
+              <div
+                key={i}
+                className="flex flex-shrink-0 items-center gap-2.5 text-white/70"
               >
-                <Icon className="w-4 h-4 text-sky-brand flex-shrink-0" />
-                <span className="text-sm font-medium whitespace-nowrap">{badge.label}</span>
-              </motion.div>
+                <Icon className="h-4 w-4 flex-shrink-0 text-sky-brand" />
+                <span className="whitespace-nowrap text-sm font-medium">
+                  {badge.label}
+                </span>
+                <span className="ml-12 h-1 w-1 rounded-full bg-sky-brand/40" />
+              </div>
             );
           })}
         </div>

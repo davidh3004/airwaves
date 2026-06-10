@@ -38,10 +38,10 @@ export default function AdminLoginPage() {
       <div className="w-full max-w-sm glass border border-white/8 rounded-3xl p-10">
         <div className="flex justify-center mb-8">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo.svg" alt="Air Waves Comfort" className="h-10 w-auto" />
+          <img src="/logo.svg" alt="Air Waves Comfort" className="h-14 w-auto" />
         </div>
         <h1 className="text-xl font-serif font-bold text-center mb-8 text-white">
-          Admin Panel
+          Content Manager
         </h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="relative">

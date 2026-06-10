@@ -3,12 +3,15 @@
 import { motion } from "framer-motion";
 import { CheckCircle2 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+import TiltCard from "@/components/ui/TiltCard";
+import AnimatedCounter from "@/components/ui/AnimatedCounter";
 
+// `value`/`suffix` drive the count-up; `text` is used for non-numeric stats.
 const STATS = [
-  { value: "15+", key: "years" as const },
-  { value: "2000+", key: "clients" as const },
-  { value: "24/7", key: "emergency" as const },
-  { value: "100%", key: "satisfaction" as const },
+  { key: "years" as const, value: 15, suffix: "+" },
+  { key: "clients" as const, value: 2000, suffix: "+" },
+  { key: "emergency" as const, text: "24/7" },
+  { key: "satisfaction" as const, value: 100, suffix: "%" },
 ];
 
 export default function ComfortExperience() {
@@ -25,26 +28,40 @@ export default function ComfortExperience() {
           viewport={{ once: true }}
           className="relative"
         >
-          <div className="relative rounded-2xl overflow-hidden aspect-[4/3] bg-gradient-to-br from-[#0a2a6e] to-[#040e26] border border-white/5">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/gallery/photo1.jpg"
-              alt="Air Waves Comfort technician"
-              className="w-full h-full object-cover opacity-70"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#040e26]/80 via-transparent to-transparent" />
-          </div>
+          <TiltCard className="group rounded-2xl" max={6}>
+            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-[#0a2a6e] to-[#040e26] shadow-glow">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={C.imageSrc}
+                alt={C.imageAlt}
+                className="h-full w-full object-cover opacity-90 transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#040e26]/80 via-transparent to-transparent" />
+            </div>
+          </TiltCard>
 
-          {/* Stats overlay */}
-          <div className="grid grid-cols-2 gap-3 mt-4">
-            {STATS.map((s) => (
-              <div
+          {/* Animated stat counters */}
+          <div className="mt-4 grid grid-cols-2 gap-3">
+            {STATS.map((s, i) => (
+              <motion.div
                 key={s.key}
-                className="glass rounded-xl p-4 text-center"
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08 }}
+                className="glass-panel rounded-xl p-4 text-center"
               >
-                <div className="text-2xl font-serif font-bold text-sky-brand">{s.value}</div>
-                <div className="text-xs text-white/50 mt-1">{C.stats[s.key]}</div>
-              </div>
+                <div className="font-serif text-2xl font-bold text-sky-brand">
+                  {"text" in s ? (
+                    s.text
+                  ) : (
+                    <AnimatedCounter value={s.value} suffix={s.suffix} />
+                  )}
+                </div>
+                <div className="mt-1 text-xs text-white/50">
+                  {C.stats[s.key]}
+                </div>
+              </motion.div>
             ))}
           </div>
         </motion.div>

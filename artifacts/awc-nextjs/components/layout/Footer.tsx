@@ -19,11 +19,17 @@ export default function Footer() {
         {/* Brand */}
         <div className="lg:col-span-1">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo.svg" alt="Air Waves Comfort" className="h-10 w-auto mb-4" />
+          <img
+            src="/logo.svg"
+            alt="Air Waves Comfort"
+            className="h-14 w-auto mb-4 sm:h-16"
+          />
           <p className="leading-relaxed text-white/50">{F.description}</p>
           <div className="mt-4 flex items-center gap-2 text-xs text-white/30">
             <Shield className="w-3.5 h-3.5" />
-            <span>{F.license}: {LICENSE}</span>
+            <span>
+              {F.license}: {LICENSE}
+            </span>
           </div>
         </div>
 
@@ -33,7 +39,10 @@ export default function Footer() {
           <ul className="space-y-2.5">
             {Object.entries(F.links).map(([key, label]) => (
               <li key={key}>
-                <a href={`#${key}`} className="hover:text-white transition-colors">
+                <a
+                  href={`#${key}`}
+                  className="hover:text-white transition-colors"
+                >
                   {label}
                 </a>
               </li>
@@ -47,7 +56,10 @@ export default function Footer() {
           <ul className="space-y-2.5">
             {Object.values(F.serviceLinks).map((label) => (
               <li key={label}>
-                <a href="#services" className="hover:text-white transition-colors">
+                <a
+                  href="#services"
+                  className="hover:text-white transition-colors"
+                >
                   {label}
                 </a>
               </li>
@@ -81,7 +93,9 @@ export default function Footer() {
               <p className="text-xs text-white/40 mb-1">{F.address}</p>
               <address className="not-italic flex items-start gap-2">
                 <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" />
-                <span className="whitespace-pre-line leading-relaxed">{ADDRESS}</span>
+                <span className="whitespace-pre-line leading-relaxed">
+                  {ADDRESS}
+                </span>
               </address>
             </li>
           </ul>
@@ -91,10 +105,16 @@ export default function Footer() {
       {/* Bottom bar */}
       <div className="border-t border-white/5 px-4 py-5">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-white/30">
-          <span>© {YEAR} Air Waves Comfort LLC. {F.rights}</span>
+          <span>
+            © {YEAR} Air Waves Comfort LLC. {F.rights}
+          </span>
           <div className="flex gap-4">
-            <a href="#" className="hover:text-white/60 transition-colors">{F.privacy}</a>
-            <a href="#" className="hover:text-white/60 transition-colors">{F.terms}</a>
+            <a href="#" className="hover:text-white/60 transition-colors">
+              {F.privacy}
+            </a>
+            <a href="#" className="hover:text-white/60 transition-colors">
+              {F.terms}
+            </a>
           </div>
         </div>
       </div>

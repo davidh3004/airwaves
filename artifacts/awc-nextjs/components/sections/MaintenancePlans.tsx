@@ -52,10 +52,10 @@ export default function MaintenancePlans() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className={`relative flex flex-col rounded-2xl p-8 border transition-all ${
+                className={`relative flex flex-col rounded-2xl border p-8 transition-all duration-300 hover:-translate-y-1 ${
                   isHighlight
-                    ? "bg-gradient-to-b from-sky-brand/20 to-[#060f24] border-sky-brand/40 shadow-xl shadow-sky-brand/10 scale-105"
-                    : "glass border-white/8"
+                    ? "border-sky-brand/40 bg-gradient-to-b from-sky-brand/20 to-[#060f24] shadow-glow md:scale-105"
+                    : "glass-panel hover:border-sky-brand/25"
                 }`}
               >
                 {isHighlight && (
@@ -64,12 +64,17 @@ export default function MaintenancePlans() {
                   </div>
                 )}
 
-                <h3 className="font-serif text-xl font-bold mb-2">{plan.name}</h3>
+                <h3 className="font-serif text-xl font-bold mb-2">
+                  {plan.name}
+                </h3>
                 <p className="text-white/50 text-sm mb-6">{plan.description}</p>
 
                 <ul className="space-y-3 flex-1 mb-8">
                   {plan.features.map((f) => (
-                    <li key={f} className="flex items-center gap-2.5 text-sm text-white/80">
+                    <li
+                      key={f}
+                      className="flex items-center gap-2.5 text-sm text-white/80"
+                    >
                       <CheckCircle2 className="w-4 h-4 text-sky-brand flex-shrink-0" />
                       {f}
                     </li>

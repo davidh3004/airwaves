@@ -21,6 +21,7 @@ export default function Navbar() {
     { label: T.nav.services, href: "#services" },
     { label: T.nav.gallery, href: "#gallery" },
     { label: T.nav.maintenance, href: "#maintenance" },
+    { label: T.nav.financing, href: "#financing" },
     { label: T.nav.reviews, href: "#reviews" },
     { label: T.nav.faq, href: "#faq" },
   ];
@@ -33,11 +34,11 @@ export default function Navbar() {
           : "bg-transparent"
       }`}
     >
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+      <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2.5 flex-shrink-0">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo.svg" alt="Air Waves Comfort" className="h-9 w-auto" />
+          <img src="/logo.svg" alt="Air Waves Comfort" className="h-12 w-auto sm:h-14" />
         </Link>
 
         {/* Desktop Nav */}
@@ -64,7 +65,9 @@ export default function Navbar() {
                 <button
                   onClick={() => setLang(l)}
                   className={`transition-colors ${
-                    lang === l ? "text-white" : "text-white/40 hover:text-white/70"
+                    lang === l
+                      ? "text-white"
+                      : "text-white/40 hover:text-white/70"
                   }`}
                 >
                   {l.toUpperCase()}

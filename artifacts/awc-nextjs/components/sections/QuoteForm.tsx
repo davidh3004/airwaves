@@ -30,7 +30,8 @@ type Status = "idle" | "loading" | "success" | "error";
 export default function QuoteForm() {
   const { T, lang } = useLanguage();
   const Q = T.quote;
-  const serviceOptions = lang === "es" ? SERVICE_OPTIONS_ES : SERVICE_OPTIONS_EN;
+  const serviceOptions =
+    lang === "es" ? SERVICE_OPTIONS_ES : SERVICE_OPTIONS_EN;
 
   const [status, setStatus] = useState<Status>("idle");
   const [form, setForm] = useState({
@@ -42,7 +43,9 @@ export default function QuoteForm() {
   });
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
   ) => setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
 
   const handleSubmit = async (e: FormEvent) => {
@@ -116,12 +119,20 @@ export default function QuoteForm() {
                 <div className="w-16 h-16 rounded-full bg-green-500/10 flex items-center justify-center mx-auto mb-5">
                   <CheckCircle2 className="w-8 h-8 text-green-400" />
                 </div>
-                <h3 className="text-2xl font-serif font-bold mb-3">{Q.successTitle}</h3>
+                <h3 className="text-2xl font-serif font-bold mb-3">
+                  {Q.successTitle}
+                </h3>
                 <p className="text-white/60 mb-8">{Q.successBody}</p>
                 <button
                   onClick={() => {
                     setStatus("idle");
-                    setForm({ name: "", phone: "", email: "", serviceType: "", message: "" });
+                    setForm({
+                      name: "",
+                      phone: "",
+                      email: "",
+                      serviceType: "",
+                      message: "",
+                    });
                   }}
                   className="text-sky-brand text-sm font-medium hover:underline"
                 >
@@ -242,7 +253,9 @@ export default function QuoteForm() {
                       </>
                     )}
                   </button>
-                  <p className="text-center text-xs text-white/30">{Q.disclaimer}</p>
+                  <p className="text-center text-xs text-white/30">
+                    {Q.disclaimer}
+                  </p>
                 </div>
               </motion.form>
             )}
