@@ -33,6 +33,16 @@ pnpm dev
 
 Full setup (Supabase, Resend, GitHub, Vercel): **[artifacts/awc-nextjs/SETUP.md](artifacts/awc-nextjs/SETUP.md)**
 
+### Vercel (required setting)
+
+In **Project Settings → General → Root Directory**, set:
+
+```
+artifacts/awc-nextjs
+```
+
+Vercel must use the `package.json` that contains `next`. If Root Directory is the repo root, deploy will fail with “No Next.js version detected”.
+
 ## Repo layout
 
 ```

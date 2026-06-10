@@ -102,16 +102,32 @@ These are listed in `.gitignore`.
 
 ## 4. Deploy on Vercel (recommended)
 
-1. Import the GitHub repo at [vercel.com/new](https://vercel.com/new).
-2. **Root Directory:** `artifacts/awc-nextjs` (required)
-3. **Framework Preset:** Next.js (must **not** be "Other")
-4. **Output Directory:** leave **empty** (do not set `public` — Next.js uses `.next` automatically)
-5. **Build command:** leave empty (uses `vercel.json` → `next build`) — do **not** use `pnpm run build:all`
-6. **Install command:** `cd ../.. && pnpm install` (when Root Directory is `artifacts/awc-nextjs`)
-7. Add **all** environment variables from `.env.local` in **Settings → Environment Variables**.
-8. Deploy.
+### Step A — Set Root Directory (fixes “No Next.js version detected”)
 
-If Root Directory is the **repo root** instead, the root `vercel.json` sets `"framework": "nextjs"` so Vercel does not look for a static `public` output folder.
+1. Open [vercel.com](https://vercel.com) → your project → **Settings** → **General**.
+2. Find **Root Directory** → click **Edit**.
+3. Enter exactly: `artifacts/awc-nextjs`
+4. Save.
+
+Vercel reads `next` from `artifacts/awc-nextjs/package.json`. If Root Directory is the repo root (`.`), detection fails.
+
+### Step B — Build settings
+
+| Setting | Value |
+|---------|--------|
+| **Framework Preset** | Next.js |
+| **Root Directory** | `artifacts/awc-nextjs` |
+| **Output Directory** | *(leave empty)* |
+| **Build Command** | *(leave empty — uses `vercel.json` → `next build`)* |
+| **Install Command** | `cd ../.. && pnpm install` |
+| **Include files outside Root Directory** | **Enabled** (monorepo) |
+
+### Step C — Environment & deploy
+
+1. Add **all** variables from `.env.local` under **Settings → Environment Variables** (Production + Preview).
+2. **Redeploy** with “Clear build cache” if a previous deploy failed.
+
+If Root Directory was wrong on the first import, change it in Step A and redeploy — you do not need a new GitHub repo.
 
 Set `NEXT_PUBLIC_SITE_URL` to your production URL (e.g. `https://airwavesc.com`).
 
