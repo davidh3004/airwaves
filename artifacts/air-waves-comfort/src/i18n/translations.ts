@@ -77,6 +77,7 @@ export const translations = {
           name: "Basic Care",
           description: "Essential preventative maintenance for a single system.",
           features: ["2 Maintenance Visits/Year", "Filter Inspection", "Basic Coil Cleaning", "15% Off Repairs"],
+          highlight: false,
         },
         {
           name: "Comfort Plus",
@@ -88,6 +89,7 @@ export const translations = {
           name: "Premium Elite",
           description: "The ultimate white-glove service for multiple systems or large homes.",
           features: ["4 Maintenance Visits/Year", "HEPA Filter Replacements", "Duct Inspection & Sanitization", "VIP Front-of-Line Service", "No Emergency Fees", "20% Off Repairs", "Annual IAQ Assessment"],
+          highlight: false,
         },
       ],
     },
@@ -243,6 +245,7 @@ export const translations = {
           name: "Cuidado Básico",
           description: "Mantenimiento preventivo esencial para un solo sistema.",
           features: ["2 Visitas de Mantenimiento/Año", "Inspección de Filtro", "Limpieza Básica de Bobina", "15% de Descuento en Reparaciones"],
+          highlight: false,
         },
         {
           name: "Confort Plus",
@@ -254,6 +257,7 @@ export const translations = {
           name: "Elite Premium",
           description: "El servicio de guante blanco para sistemas múltiples o hogares grandes.",
           features: ["4 Visitas de Mantenimiento/Año", "Reemplazos de Filtro HEPA", "Inspección y Sanitización de Ductos", "Servicio VIP Prioritario", "Sin Cargos de Emergencia", "20% de Descuento en Reparaciones", "Evaluación Anual de Calidad del Aire"],
+          highlight: false,
         },
       ],
     },

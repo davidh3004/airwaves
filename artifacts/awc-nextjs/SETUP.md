@@ -103,12 +103,14 @@ These are listed in `.gitignore`.
 ## 4. Deploy on Vercel (recommended)
 
 1. Import the GitHub repo at [vercel.com/new](https://vercel.com/new).
-2. **Root Directory:** `artifacts/awc-nextjs`
+2. **Root Directory:** `artifacts/awc-nextjs` (required)
 3. **Framework:** Next.js (auto-detected)
-4. **Install command:** `cd ../.. && pnpm install`  
-   Or set monorepo root to repo root and use default `pnpm install`.
-5. Add **all** environment variables from `.env.local` in **Settings → Environment Variables**.
-6. Deploy.
+4. **Build command:** leave default (`next build`) or use `pnpm run build` — do **not** use the monorepo root `pnpm run build:all` (that typechecks every package).
+5. **Install command:** `cd ../.. && pnpm install` (from `artifacts/awc-nextjs`)
+6. Add **all** environment variables from `.env.local` in **Settings → Environment Variables**.
+7. Deploy.
+
+If the Vercel project root is the **repo root** instead, the root `vercel.json` and `package.json` `build` script already scope the build to `@workspace/awc-nextjs` only.
 
 Set `NEXT_PUBLIC_SITE_URL` to your production URL (e.g. `https://airwavesc.com`).
 

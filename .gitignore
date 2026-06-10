@@ -44,6 +44,21 @@ Thumbs.db
 .cursor/rules/nx-rules.mdc
 .github/instructions/nx.instructions.md
 
+# Environment (secrets)
+.env
+.env.local
+.env.*.local
+
+# Next.js build output
+.next/
+out/
+
+# Local tooling / caches
+.config/
+
+# Local CMS overrides (dev fallback when Supabase is not configured)
+artifacts/awc-nextjs/cms/
+
 # Replit
 .cache/
 .local/
