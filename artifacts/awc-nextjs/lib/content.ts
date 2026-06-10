@@ -4,7 +4,7 @@
  * The admin panel can override any key in the `site_settings` table.
  */
 
-import { supabase } from "@/lib/supabase";
+import { getSupabase } from "@/lib/supabase";
 
 const SERVICE_AREAS = [
   "Miami", "Miami Beach", "Coral Gables", "Coconut Grove", "Brickell",
@@ -18,7 +18,7 @@ const SERVICE_AREAS = [
 
 export async function getSiteSetting<T>(key: string, fallback: T): Promise<T> {
   try {
-    const { data, error } = await supabase
+    const { data, error } = await getSupabase()
       .from("site_settings")
       .select("value")
       .eq("key", key)

@@ -1,6 +1,13 @@
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+let resendClient: Resend | null = null;
+
+function getResend(): Resend {
+  if (!resendClient) {
+    resendClient = new Resend(process.env.RESEND_API_KEY);
+  }
+  return resendClient;
+}
 
 const FROM = process.env.RESEND_FROM_EMAIL ?? "quotes@airwavesc.com";
 const NOTIFY = process.env.QUOTE_NOTIFY_EMAIL ?? "airwavescomfort33@gmail.com";
@@ -92,14 +99,14 @@ export async function sendQuoteEmails(payload: QuotePayload) {
 </html>`;
 
   await Promise.all([
-    resend.emails.send({
+    getResend().emails.send({
       from: FROM,
       to: NOTIFY,
       replyTo: email,
       subject: `New Quote Request — ${serviceType} (${name})`,
       html: internalHtml,
     }),
-    resend.emails.send({
+    getResend().emails.send({
       from: FROM,
       to: email,
       subject: isEs
