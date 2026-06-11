@@ -157,15 +157,6 @@ export default function Hero() {
         style={{ y: contentY, opacity: contentOpacity }}
         className="relative z-10 mx-auto max-w-4xl px-4 pt-28 text-center md:pt-24"
       >
-        <motion.span
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="mb-8 inline-block rounded-full border border-sky-brand/40 bg-sky-brand/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-sky-brand backdrop-blur-sm"
-        >
-          {T.hero.tag}
-        </motion.span>
-
         <h1 className="mb-6 font-serif text-5xl font-bold leading-[1.05] [text-wrap:balance] sm:text-6xl md:text-7xl lg:text-[6.5rem]">
           {lines.map((line, i) => (
             <motion.span
