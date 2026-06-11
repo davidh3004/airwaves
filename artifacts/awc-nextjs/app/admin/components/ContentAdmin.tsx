@@ -8,6 +8,7 @@ import {
   AlertCircle,
   Menu,
   X,
+  Trash2,
 } from "lucide-react";
 import type { Lang } from "@/i18n/translations";
 import type { SiteContent } from "@/types/site-content";
@@ -301,7 +302,32 @@ export default function ContentAdmin() {
             <Field label="Heading" value={content.gallery.heading} onChange={(v) => patch({ gallery: { ...content.gallery, heading: v } })} />
             <Field label="Body" value={content.gallery.body} onChange={(v) => patch({ gallery: { ...content.gallery, body: v } })} multiline />
             {content.gallery.images.map((img, i) => (
-              <div key={i} className="space-y-3">
+              <div key={i} className="space-y-3 rounded-xl border border-white/8 p-4">
+                <div className="flex items-center justify-between gap-3">
+                  <p className="text-xs font-bold text-sky-brand">Image {i + 1}</p>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (
+                        !window.confirm(
+                          `Remove "${img.label || `image ${i + 1}`}" from the gallery? Click Save ${lang.toUpperCase()} to apply on the live site.`,
+                        )
+                      ) {
+                        return;
+                      }
+                      patch({
+                        gallery: {
+                          ...content.gallery,
+                          images: content.gallery.images.filter((_, j) => j !== i),
+                        },
+                      });
+                    }}
+                    className="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-medium text-red-400 hover:bg-red-500/10"
+                  >
+                    <Trash2 className="h-3.5 w-3.5" />
+                    Delete
+                  </button>
+                </div>
                 <ImageField
                   label={`Image ${i + 1}`}
                   src={img.src}
