@@ -76,12 +76,14 @@ export function ImageField({
     <div className="space-y-3 rounded-xl border border-white/8 p-4">
       <p className="text-xs font-medium text-white/50">{label}</p>
       {src && (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          src={src}
-          alt={alt}
-          className="h-24 w-full max-w-xs rounded-lg object-cover"
-        />
+        <div className="flex max-h-72 w-full max-w-md items-center justify-center rounded-lg border border-white/10 bg-black/30 p-3">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={src}
+            alt={alt}
+            className="max-h-64 w-auto max-w-full object-contain"
+          />
+        </div>
       )}
       <Field label="Image URL" value={src} onChange={onSrc} hint="/gallery/photo.jpg" />
       <Field label="Alt text" value={alt} onChange={onAlt} />
