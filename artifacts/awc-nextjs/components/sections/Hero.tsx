@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   FileText,
   Zap,
@@ -26,19 +26,7 @@ const HERO_BADGES = [
 
 export default function Hero() {
   const { T } = useLanguage();
-  const sectionRef = useRef<HTMLElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  // Scroll-linked parallax: content drifts up + fades as you scroll past hero
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end start"],
-  });
-  const contentY = useTransform(scrollYProgress, [0, 1], [0, 120]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
-  const ribbonY = useTransform(scrollYProgress, [0, 1], [0, -80]);
-  // Hide scroll hint as soon as user scrolls so it won't cover the trust bar below
-  const scrollHintOpacity = useTransform(scrollYProgress, [0, 0.08], [1, 0]);
 
   // Cooling-airflow particle field on a canvas. Particles drift rightward
   // (like air pushed from a vent) with a soft sine wobble.
@@ -112,7 +100,6 @@ export default function Hero() {
 
   return (
     <section
-      ref={sectionRef}
       id="hero"
       className="relative z-0 flex min-h-screen flex-col items-center justify-center overflow-hidden noise-overlay"
     >
@@ -128,13 +115,10 @@ export default function Hero() {
       {/* Ambient aurora mesh */}
       <Aurora intensity="medium" />
 
-      {/* Flowing airflow ribbons (parallax) */}
-      <motion.div
-        style={{ y: ribbonY }}
-        className="absolute inset-x-0 top-1/4 h-[60vh]"
-      >
+      {/* Flowing airflow ribbons */}
+      <div className="absolute inset-x-0 top-1/4 h-[60vh]">
         <AirflowRibbon />
-      </motion.div>
+      </div>
 
       {/* Drifting cooling particles */}
       <canvas
@@ -153,10 +137,7 @@ export default function Hero() {
       />
 
       {/* Content */}
-      <motion.div
-        style={{ y: contentY, opacity: contentOpacity }}
-        className="relative z-10 mx-auto max-w-4xl px-4 pt-28 text-center md:pt-24"
-      >
+      <div className="relative z-10 mx-auto max-w-4xl px-4 pt-28 text-center md:pt-24">
         <h1 className="mb-6 font-serif text-5xl font-bold leading-[1.05] [text-wrap:balance] sm:text-6xl md:text-7xl lg:text-[6.5rem]">
           {lines.map((line, i) => (
             <motion.span
@@ -214,7 +195,7 @@ export default function Hero() {
             </div>
           </div>
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 }
