@@ -28,6 +28,7 @@ const SECTIONS = [
   { id: "faq", label: "FAQ" },
   { id: "quote", label: "Quote Form" },
   { id: "cta", label: "Final CTA" },
+  { id: "contact", label: "Contact Info" },
   { id: "footer", label: "Footer" },
 ] as const;
 
@@ -523,6 +524,35 @@ export default function ContentAdmin() {
             <Field label="Body" value={content.cta.body} onChange={(v) => patch({ cta: { ...content.cta, body: v } })} multiline />
             <Field label="Schedule button" value={content.cta.schedule} onChange={(v) => patch({ cta: { ...content.cta, schedule: v } })} />
             <Field label="Call label" value={content.cta.call} onChange={(v) => patch({ cta: { ...content.cta, call: v } })} />
+          </SectionCard>
+        )}
+
+        {section === "contact" && (
+          <SectionCard title="Contact Info">
+            <p className="text-xs text-white/45">
+              Phone numbers and address appear in the navbar, footer, emergency section, and call buttons.
+            </p>
+            <Field
+              label="Primary phone (emergency line)"
+              value={content.contact.phone1}
+              onChange={(v) => patch({ contact: { ...content.contact, phone1: v } })}
+            />
+            <Field
+              label="Secondary phone (office)"
+              value={content.contact.phone2}
+              onChange={(v) => patch({ contact: { ...content.contact, phone2: v } })}
+            />
+            <Field
+              label="Address"
+              value={content.contact.address}
+              onChange={(v) => patch({ contact: { ...content.contact, address: v } })}
+              multiline
+            />
+            <Field
+              label="License number"
+              value={content.contact.license}
+              onChange={(v) => patch({ contact: { ...content.contact, license: v } })}
+            />
           </SectionCard>
         )}
 

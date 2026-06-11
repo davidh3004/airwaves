@@ -134,6 +134,12 @@ export interface SiteContent {
     schedule: string;
     call: string;
   };
+  contact: {
+    phone1: string;
+    phone2: string;
+    address: string;
+    license: string;
+  };
   footer: {
     description: string;
     quickLinks: string;

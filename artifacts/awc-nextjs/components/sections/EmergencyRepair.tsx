@@ -3,10 +3,12 @@
 import { motion } from "framer-motion";
 import { Zap, Phone } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+import { toTelHref } from "@/lib/contact-utils";
 
 export default function EmergencyRepair() {
   const { T } = useLanguage();
   const E = T.emergency;
+  const { phone1 } = T.contact;
 
   return (
     <section className="relative py-20 overflow-hidden">
@@ -62,21 +64,14 @@ export default function EmergencyRepair() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center"
+          className="flex justify-center"
         >
           <a
-            href="tel:+17863623648"
+            href={toTelHref(phone1)}
             className="inline-flex items-center justify-center gap-3 bg-red-brand text-white font-bold text-lg px-9 py-4 rounded-full hover:bg-red-500 transition-colors shadow-2xl shadow-red-brand/40"
           >
             <Phone className="w-5 h-5" />
-            (786) 362-3648
-          </a>
-          <a
-            href="tel:+17864242925"
-            className="inline-flex items-center justify-center gap-3 border border-white/20 text-white/80 font-semibold px-9 py-4 rounded-full hover:border-white/40 hover:text-white transition-colors"
-          >
-            <Phone className="w-5 h-5" />
-            (786) 424-2925
+            {phone1}
           </a>
         </motion.div>
       </div>

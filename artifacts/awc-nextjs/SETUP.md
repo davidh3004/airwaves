@@ -148,7 +148,66 @@ Without Resend, quote **storage in Supabase still works**; only emails fail. Con
 
 ---
 
-## 6. Checklist before go-live
+## 6. Custom domain (go live)
+
+Assuming your domain is **airwavesc.com** (change if different).
+
+### A — Add domain in Vercel
+
+1. Vercel project → **Settings** → **Domains**
+2. Add `airwavesc.com` and `www.airwavesc.com`
+3. Vercel shows the DNS records you need (copy them exactly)
+
+### B — DNS at your registrar
+
+Where you bought the domain (GoDaddy, Namecheap, Cloudflare, Google Domains, etc.):
+
+| Host | Type | Value |
+|------|------|--------|
+| `@` | **A** | `76.76.21.21` |
+| `www` | **CNAME** | `cname.vercel-dns.com` |
+
+If using **Cloudflare**, set proxy to **DNS only** (grey cloud) until SSL is issued, then you can enable proxy.
+
+DNS can take 5 minutes–48 hours. Vercel shows **Valid** when ready.
+
+### C — Set primary domain
+
+In Vercel **Domains**, set `airwavesc.com` as primary and redirect `www` → apex (or the reverse — pick one).
+
+### D — Update environment variables
+
+In Vercel → **Environment Variables** (Production + Preview):
+
+```env
+NEXT_PUBLIC_SITE_URL=https://airwavesc.com
+```
+
+**Redeploy** after changing env vars.
+
+### E — Production email (optional)
+
+For quote emails from `@airwavesc.com` instead of Resend sandbox:
+
+1. [resend.com](https://resend.com) → **Domains** → add `airwavesc.com`
+2. Add the DNS records Resend provides (SPF, DKIM)
+3. Update Vercel env:
+
+```env
+RESEND_FROM_EMAIL=quotes@airwavesc.com
+```
+
+### F — Smoke test
+
+- [ ] `https://airwavesc.com` loads with SSL (padlock)
+- [ ] `https://www.airwavesc.com` redirects correctly
+- [ ] `/admin/login` works
+- [ ] Quote form → row in Supabase `quote_submissions`
+- [ ] CMS save → updates homepage
+
+---
+
+## 7. Checklist before go-live
 
 - [ ] `supabase/schema.sql` executed
 - [ ] All env vars set in Vercel (or host)

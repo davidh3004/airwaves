@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { CalendarCheck, Phone } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+import { toTelHref } from "@/lib/contact-utils";
 
 export default function FinalCTA() {
   const { T } = useLanguage();
@@ -60,11 +61,11 @@ export default function FinalCTA() {
             {C.schedule}
           </a>
           <a
-            href="tel:+17863623648"
+            href={toTelHref(T.contact.phone1)}
             className="inline-flex items-center justify-center gap-2 border border-white/20 text-white font-semibold px-8 py-4 rounded-full hover:border-sky-brand/60 hover:text-sky-brand transition-colors"
           >
             <Phone className="w-5 h-5" />
-            {C.call}: (786) 362-3648
+            {C.call}: {T.contact.phone1}
           </a>
         </motion.div>
       </div>

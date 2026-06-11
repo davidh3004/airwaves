@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Phone, Menu, X } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import { type Lang } from "@/i18n/translations";
+import { toTelHref } from "@/lib/contact-utils";
 
 export default function Navbar() {
   const { T, lang, setLang } = useLanguage();
@@ -78,11 +79,11 @@ export default function Navbar() {
 
           {/* Phone */}
           <a
-            href="tel:+17863623648"
+            href={toTelHref(T.contact.phone1)}
             className="flex items-center gap-2 text-sm text-white/80 hover:text-white transition-colors"
           >
             <Phone className="w-4 h-4" />
-            <span className="font-semibold">(786) 362-3648</span>
+            <span className="font-semibold">{T.contact.phone1}</span>
           </a>
 
           {/* CTA */}
@@ -130,10 +131,10 @@ export default function Navbar() {
               ))}
             </div>
             <a
-              href="tel:+17863623648"
+              href={toTelHref(T.contact.phone1)}
               className="flex items-center gap-1.5 text-sm text-white/80"
             >
-              <Phone className="w-4 h-4" /> (786) 362-3648
+              <Phone className="w-4 h-4" /> {T.contact.phone1}
             </a>
           </div>
           <a

@@ -19,11 +19,11 @@ function buildDefault(lang: Lang): SiteContent {
     comfort: {
       ...t.comfort,
       bullets: [...t.comfort.bullets],
-      imageSrc: "/gallery/van-mansion.png",
+      imageSrc: "/gallery/fleet-office-1.png",
       imageAlt:
         lang === "es"
-          ? "Camioneta de Air Waves Comfort en una casa de lujo en Miami"
-          : "Air Waves Comfort van at a luxury Miami home",
+          ? "Camionetas de servicio de Air Waves Comfort en un sitio comercial"
+          : "Air Waves Comfort service vans at a commercial job site",
       stats: { ...t.comfort.stats },
     },
     emergency: { ...t.emergency },
@@ -49,6 +49,12 @@ function buildDefault(lang: Lang): SiteContent {
     },
     quote: { ...t.quote },
     cta: { ...t.cta },
+    contact: {
+      phone1: "(786) 362-3648",
+      phone2: "(786) 424-2925",
+      address: "9802 NW 80 Ave Bay G48\nHialeah Gardens, FL 33016",
+      license: "CAC1820880",
+    },
     footer: {
       ...t.footer,
       links: { ...t.footer.links },

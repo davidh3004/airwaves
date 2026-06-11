@@ -2,16 +2,14 @@
 
 import { Phone, MapPin, Shield } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+import { toTelHref } from "@/lib/contact-utils";
 
-const PHONE1 = "(786) 362-3648";
-const PHONE2 = "(786) 424-2925";
-const ADDRESS = "9802 NW 80 Ave Bay G48\nHialeah Gardens, FL 33016";
-const LICENSE = "CAC1820880";
 const YEAR = new Date().getFullYear();
 
 export default function Footer() {
   const { T } = useLanguage();
   const F = T.footer;
+  const { phone1, phone2, address, license } = T.contact;
 
   return (
     <footer className="bg-[#030b1c] border-t border-white/5 text-white/70 text-sm">
@@ -28,7 +26,7 @@ export default function Footer() {
           <div className="mt-4 flex items-center gap-2 text-xs text-white/30">
             <Shield className="w-3.5 h-3.5" />
             <span>
-              {F.license}: {LICENSE}
+              {F.license}: {license}
             </span>
           </div>
         </div>
@@ -74,19 +72,19 @@ export default function Footer() {
             <li>
               <p className="text-xs text-white/40 mb-1">{F.emergencyLine}</p>
               <a
-                href={`tel:+1${PHONE1.replace(/\D/g, "")}`}
+                href={toTelHref(phone1)}
                 className="flex items-center gap-2 text-[#00aeef] font-semibold hover:brightness-110 transition"
               >
-                <Phone className="w-4 h-4" /> {PHONE1}
+                <Phone className="w-4 h-4" /> {phone1}
               </a>
             </li>
             <li>
               <p className="text-xs text-white/40 mb-1">{F.office}</p>
               <a
-                href={`tel:+1${PHONE2.replace(/\D/g, "")}`}
+                href={toTelHref(phone2)}
                 className="flex items-center gap-2 hover:text-white transition-colors"
               >
-                <Phone className="w-4 h-4" /> {PHONE2}
+                <Phone className="w-4 h-4" /> {phone2}
               </a>
             </li>
             <li>
@@ -94,7 +92,7 @@ export default function Footer() {
               <address className="not-italic flex items-start gap-2">
                 <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" />
                 <span className="whitespace-pre-line leading-relaxed">
-                  {ADDRESS}
+                  {address}
                 </span>
               </address>
             </li>

@@ -4,9 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Phone } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
-
-const PHONE = "(786) 362-3648";
-const TEL = "tel:+17863623648";
+import { toTelHref } from "@/lib/contact-utils";
 
 /**
  * StickyCallButton
@@ -16,6 +14,7 @@ const TEL = "tel:+17863623648";
  */
 export default function StickyCallButton() {
   const { T } = useLanguage();
+  const phone = T.contact.phone1;
   const [show, setShow] = useState(false);
 
   useEffect(() => {
@@ -29,18 +28,17 @@ export default function StickyCallButton() {
     <AnimatePresence>
       {show && (
         <motion.a
-          href={TEL}
+          href={toTelHref(phone)}
           initial={{ opacity: 0, scale: 0.6, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.6, y: 20 }}
           transition={{ type: "spring", stiffness: 260, damping: 20 }}
-          aria-label={`${T.nav.call} ${PHONE}`}
+          aria-label={`${T.nav.call} ${phone}`}
           className="group fixed bottom-5 right-5 z-50 flex items-center gap-3 rounded-full bg-red-brand px-4 py-4 font-bold text-white shadow-glow-red animate-glow-pulse sm:px-5"
         >
           <Phone className="h-5 w-5 flex-shrink-0" />
-          {/* Label collapses on small screens to keep it tidy */}
           <span className="hidden max-w-0 overflow-hidden whitespace-nowrap text-sm transition-all duration-300 sm:inline sm:max-w-[160px]">
-            {PHONE}
+            {phone}
           </span>
         </motion.a>
       )}

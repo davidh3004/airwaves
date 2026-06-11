@@ -12,6 +12,7 @@ import {
   Award,
 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+import { toTelHref } from "@/lib/contact-utils";
 import Aurora from "@/components/ui/Aurora";
 import AirflowRibbon from "@/components/ui/AirflowRibbon";
 
@@ -211,7 +212,7 @@ export default function Hero() {
                 {T.hero.ctaEstimate}
               </motion.a>
               <motion.a
-                href="tel:+17863623648"
+                href={toTelHref(T.contact.phone1)}
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
                 className="inline-flex items-center justify-center gap-2 rounded-full border border-red-brand/50 px-7 py-3.5 font-semibold text-red-brand transition-colors hover:bg-red-brand/10"
